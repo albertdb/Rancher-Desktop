@@ -5,6 +5,7 @@
 $script:rancherDesktopUninstallExe = "C:\Users\$env:UserName\AppData\Local\Programs\Rancher Desktop\Uninstall Rancher Desktop.exe"
 $script:dockerFilesPath = "C:\Users\$env:UserName\AppData\Local\Programs\Rancher Desktop\resources\resources\win32\bin"
 $script:profilePath = "C:\Users\$env:UserName\Documents\WindowsPowerShell\old-profile.ps1"
+$script:wslVpnActivateScriptPath = "C:\Users\$env:UserName\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\wsl-vpnkit-start.bat"
 
 #endregion
 
@@ -80,7 +81,8 @@ function RemoveWslVpnKit
 {
     Write-Host "Removing the VPN tool..." -ForegroundColor Blue
     wsl --unregister wsl-vpnkit
-
+    Remove-Item "$script:wslVpnActivateScriptPath" -Force
+    
     Write-Host "VPN tool removed successfully." -ForegroundColor Green
 }
 

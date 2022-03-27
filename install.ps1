@@ -15,6 +15,7 @@ $script:profilePath = "C:\Users\$env:UserName\Documents\WindowsPowerShell\old-pr
 $script:dockerPackageUrl = "https://download.docker.com/win/static/stable/x86_64/docker-20.10.8.zip"
 $script:rancherDesktopUrl = "https://github.com/rancher-sandbox/rancher-desktop/releases/download/v1.1.1/Rancher.Desktop.Setup.1.1.1.exe"
 $script:wslVpnKitUrl = "https://github.com/sakai135/wsl-vpnkit/releases/download/v0.3.0/wsl-vpnkit.tar.gz"
+$script:wslVpnActivateScriptPath = "C:\Users\$env:UserName\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\wsl-vpnkit-start.bat"
 $script:restartRequired = $false
 
 #endregion
@@ -188,7 +189,11 @@ function ActivateWslVpnkit
 
     Remove-Item wsl-vpnkit.tar.gz -Force
 
+    wsl.exe -d wsl-vpnkit service wsl-vpnkit start 
+
     Write-Host "VPN tool activated." -ForegroundColor Green
+
+    "wsl.exe -d wsl-vpnkit service wsl-vpnkit star" | Out-File -FilePath $script:wslVpnActivateScriptPath
 }
 
 #endregion
